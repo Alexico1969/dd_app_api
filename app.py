@@ -11,7 +11,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @cross_origin()
 def message():
     return jsonify("July 1st : 12:00 am (EST)   9:00 am (PST)|July 2nd : 12:00 am (EST)   9:00 am (PST)|July 3rd : 12:00 am (EST)   9:00 am (PST)|July 4th : 12:00 am (EST)   9:00 am (PST)")
-    #return jsonify("Carline is the sweetest!")
+    
 
 if __name__=='__main__':
     app.run(debug=True)
