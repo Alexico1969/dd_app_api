@@ -10,7 +10,7 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 @app.route("/times", methods=["GET"])
 @cross_origin()
 def message():
-    return jsonify("""July 1st : 12:00 am (EST)   9:00 am (PST)|July 2nd : 12:00 am (EST)   9:00 am (PST)""")
+    return jsonify("July 1st : 12:00 am (EST)   9:00 am (PST)|July 2nd : 12:00 am (EST)   9:00 am (PST)")
 
 
 if __name__=='__main__':
