@@ -3,15 +3,15 @@
 <div>
     <div class="jumbotron">
         <h1>Welcome to the Dream Deferred API Admin Tool</h1>
-        <p>This tool is designed to help you manage your Dream Deferred API environment.</p>
+        <p>This tool is designed to help you manage the Dream Deferred API environment.</p>
     </div>
     <p>{{ message }}</p>
     <br>
-    <form>
-        <table class="table"  width="400px">
+    <form method="POST">
+        <table class="table times_table"  width="400px">
             <tr><th>Class times</th><th></th></tr>
             {% for time in times %}
-            <tr><td><input class="time_input" type="text" name="" value="{{time}}"></td></tr>
+            <tr><td><input name="input_{{time[0]}}" class="time_input" type="text" name="" value="{{time[1]}}"></td><td><button value="{{time[0]}}" name="id" class="btn btn-info">Update</button></td></tr>
             {% endfor %}
         </table>
     </form>

@@ -31,7 +31,12 @@ def get_times():
     cur.execute("SELECT * FROM times")
     times = cur.fetchall()
     conn.close()
-    output = []
-    for time in times:
-        output.append(time[1])
-    return output
+
+    return times
+
+def update_time(id, new_time):
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+    cur.execute("UPDATE times SET time=? WHERE id=?",(new_time,id))
+    conn.commit()
+    conn.close()

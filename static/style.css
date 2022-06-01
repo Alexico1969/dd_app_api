@@ -10,5 +10,10 @@ body{
 }
 
 .time_input{
-    width: 500px;
+    width: 350px;
+}
+
+.times_table{
+    width: 450px;
+    border-collapse: collapse;   
 }

@@ -13,9 +13,15 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 app.secret_key = 'mysecret123'
 
 
-@app.route("/", methods=['GET'])
+@app.route("/", methods=['GET', 'POST'])
 def home():
     if session.get('user'):
+        if request.method == 'POST':
+            id = request.form['id']
+            input = request.form.get('input_' + id)
+            update_time(id, input)
+            print(f"id: {id}", f"input: {input}")
+
         return render_template('home.html', times=get_times())
     return redirect(url_for('login'))
 
@@ -42,8 +48,12 @@ def logout():
 @app.route("/times", methods=["GET"])
 @cross_origin()
 def message():
+    times = get_times()
+    output_list = []
+    for time in times:
+        output_list.append(time[1])
     output = ""
-    for time in get_times():
+    for time in output_list:
         output += time + "|"
     return jsonify(output)
     
