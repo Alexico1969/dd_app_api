@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block content %}
+<div>
+    <div class="jumbotron">
+        <h1>Welcome to the Dream Deferred API Admin Tool</h1>
+        <p>This tool is designed to help you manage your Dream Deferred API environment.</p>
+    </div>
+    <p>{{ message }}</p>
+    <br>
+    <form>
+        <table class="table"  width="400px">
+            <tr><th>Class times</th><th></th></tr>
+            {% for time in times %}
+            <tr><td><input class="time_input" type="text" name="" value="{{time}}"></td></tr>
+            {% endfor %}
+        </table>
+    </form>
+
+
+</div>
+{% endblock %}
