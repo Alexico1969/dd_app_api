@@ -5,7 +5,7 @@ body{
 #logout_btn{
     display: inline-block;
     position: fixed;
-    right: 10px;
+    right: 20px;
     top: 10px;
 }
 
@@ -16,4 +16,17 @@ body{
 .times_table{
     width: 450px;
     border-collapse: collapse;   
+}
+
+.login{
+    margin-left: 40%;
+    margin-top: 10%;
+}
+
+.logo{
+    width: 100px;
+    height: auto;
+    position: fixed;
+    top: 10px;
+    right: 80px;
 }
