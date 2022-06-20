@@ -35,7 +35,7 @@ def login():
             session['user'] = username
             return redirect(url_for('home'))
         else:
-            return render_template('message.html', message="Wrong username or password", forward="login")
+            return render_template('message.html', message="Wrong username or password", forward="/login")
     return render_template('login.html')
 
 @app.route("/logout", methods=['GET'])
