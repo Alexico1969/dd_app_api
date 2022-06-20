@@ -2,6 +2,14 @@ body{
     padding: 20px;
 }
 
+a{
+    color: black;
+}
+
+a:hover{
+    color: #111;
+}
+
 #logout_btn{
     display: inline-block;
     position: fixed;
@@ -51,4 +59,8 @@ body{
 .choice:hover{
     background-color:rgb(235, 178, 93);
     cursor: pointer;
+}
+
+.container{
+    margin-left: -10px;
 }

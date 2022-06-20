@@ -15,15 +15,10 @@ app.secret_key = 'mysecret123'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    if session.get('user'):
-        if request.method == 'POST':
-            id = request.form['id']
-            input = request.form.get('input_' + id)
-            update_time(id, input)
-            print(f"id: {id}", f"input: {input}")
-
-        return render_template('home.html', times=get_times())
-    return redirect(url_for('login'))
+    if not(session.get('user')):
+        return render_template("message.html", message="Please log in first", forward="/login")
+    
+    return render_template('home.html')
 
 @app.route("/login", methods=['GET','POST'])
 def login():
@@ -42,6 +37,40 @@ def login():
 def logout():
     session.pop('user', None)
     return redirect(url_for('login'))
+
+
+@app.route("/users", methods=['GET', 'POST'])
+def users():
+    if not(session.get('user')):
+        return render_template("message.html", message="Please log in first", forward="/login")
+    
+    if request.method == 'POST':
+        pass
+
+    return render_template("user_management.html")
+
+@app.route("/classes", methods=['GET', 'POST'])
+def classes():
+    if not(session.get('user')):
+        return render_template("message.html", message="Please log in first", forward="/login")
+    
+    if request.method == 'POST':
+        id = request.form['id']
+        input = request.form.get('input_' + id)
+        update_time(id, input)
+        print(f"id: {id}", f"input: {input}")
+
+    return render_template('class_times.html', times=get_times())
+
+@app.route("/jobs", methods=['GET', 'POST'])
+def jobs():
+    if not(session.get('user')):
+        return render_template("message.html", message="Please log in first", forward="/login")
+    
+    if request.method == 'POST':
+        pass
+
+    return render_template("job_board.html")
 
 #   --- API ENDPOINTS ---
 
