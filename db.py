@@ -1,3 +1,4 @@
+from re import L
 import sqlite3
 
 def connect():
@@ -33,6 +34,29 @@ def get_times():
     conn.close()
 
     return times
+
+def get_users():
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM users")
+    users = cur.fetchall()
+    conn.close()
+
+    return users
+
+def update_role(id, role):
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+    cur.execute("UPDATE users SET role=? WHERE id=?",(role,id))
+    conn.commit()
+    conn.close()
+
+def delete_user(id):
+    conn = sqlite3.connect("database.db")
+    cur = conn.cursor()
+    cur.execute("DELETE from users WHERE id=?",(id))
+    conn.commit()
+    conn.close()
 
 def update_time(id, new_time):
     conn = sqlite3.connect("database.db")

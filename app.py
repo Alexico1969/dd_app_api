@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, session, render_template, redirect, url_for, flash
+from flask import Flask, jsonify, request, session, render_template, redirect, url_for
 from flask_cors import CORS, cross_origin
 import sqlite3
 from db import *
@@ -45,9 +45,19 @@ def users():
         return render_template("message.html", message="Please log in first", forward="/login")
     
     if request.method == 'POST':
-        pass
+        #update:
+        if request.form.get('id'):
+            id = request.form.get('id')
+            input = request.form.get('input_' + id)
+            update_role(id, input)
+        #delete:
+        else:
+            id = request.form.get('del')
+            delete_user(id)
 
-    return render_template("user_management.html")
+    users = get_users()
+
+    return render_template("user_management.html", users=users)
 
 @app.route("/classes", methods=['GET', 'POST'])
 def classes():
