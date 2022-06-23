@@ -89,10 +89,10 @@ def update_time(id, new_time):
     conn.commit()
     conn.close()
 
-def update_job(id, description, link):
+def update_job(id, description):
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
-    cur.execute("UPDATE jobs SET description=?, link=? WHERE id=?",(description,link,id))
+    cur.execute("UPDATE jobs SET description=? WHERE id=?",(description,id))
     conn.commit()
     conn.close()
 

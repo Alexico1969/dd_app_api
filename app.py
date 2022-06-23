@@ -114,7 +114,16 @@ def jobs():
         return render_template("message.html", message="Please log in first", forward="/login")
     
     if request.method == 'POST':
-        pass
+        tmp_list = request.form['action'].split('-')
+        print("tmp_list: ", tmp_list)
+        action = tmp_list[0]
+        id = tmp_list[1]
+        if action == 'del':
+            delete_job(id)
+        elif action == 'upd':
+            description = request.form['input_' + id]
+            update_job(id, description)
+        
 
     return render_template('job_board.html', jobs=get_jobs())
 
