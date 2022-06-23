@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="login">
+    <p>{{ message }}</p>
+
+    
+    <h1>Create new user</h1>
+
+    <!-- create login form -->
+    <form action="{{ url_for('new_user') }}" method="post">
+        <br>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password">
+        </div>        
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email">
+        </div>
+        <div>
+            <label for="role">Role:</label>
+            <select name="role" id="role">
+            <option value="admin">admin</option>
+            <option value="clerk">clerk</option>
+            </select>
+        </div>
+        <br>
+        <div>
+            <a href="{{url_for('users')}}"><input class="btn btn-outline-info" type="cancel" value="Cancel"></a>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+    
+
+</div>
+{% endblock %}

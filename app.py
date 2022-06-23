@@ -59,6 +59,19 @@ def users():
 
     return render_template("user_management.html", users=users)
 
+@app.route("/new_user", methods=['GET', 'POST'])
+def new_user():
+    if not(session.get('user')):
+        return render_template("message.html", message="Please log in first", forward="/login")
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        role = request.form['role']
+        email = request.form['email']
+        create_user(username, password, email, role)
+        return redirect(url_for('users'))
+    return render_template('new_user.html')
+
 @app.route("/classes", methods=['GET', 'POST'])
 def classes():
     if not(session.get('user')):

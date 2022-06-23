@@ -10,12 +10,13 @@ def connect():
     conn.commit()
     conn.close()
 
-def insert(username,password,email,role):
+def create_user(username,password,email,role):
     conn = sqlite3.connect("database.db")
     cur = conn.cursor()
     cur.execute("INSERT INTO users VALUES (NULL,?,?,?,?)",(username,password,email,role))
     conn.commit()
     conn.close()
+    return
 
 def check_user_psw(username, password):
     conn = sqlite3.connect("database.db")
