@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="login">
+    <p>{{ message }}</p>
+
+    
+    <h1>Create new job</h1>
+
+    <!-- create login form -->
+    <form action="{{ url_for('new_job') }}" method="post">
+        <br>
+        <div>
+            <label for="username">Description:</label>
+            <input type="text" name="description" id="description">
+        </div>
+        <div>
+            <label for="password">Link:</label>
+            <input type="link" name="link" id="link">
+        </div>        
+        <br>
+        <div>
+            <a href="{{url_for('users')}}"><input class="btn btn-outline-info" type="cancel" value="Cancel"></a>
+            <input class="btn btn-primary" type="submit" value="Submit">
+        </div>
+    </form>
+
+</div>
+{% endblock %}

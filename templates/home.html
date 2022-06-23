@@ -10,11 +10,13 @@
     <div class="container">
         <form method="POST">
             <div class="row">
+                {% if session['admin'] %}
                 <a href="{{url_for('users')}}">       
                     <div class="col col-md-3 choice">
                         <h2>User management</h2>
                     </div>
                 </a>
+                {% endif %}
                 <a href="{{url_for('classes')}}">
                     <div class="col col-md-3 choice">
                         <h2>Class times</h2>

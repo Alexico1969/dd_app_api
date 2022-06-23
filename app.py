@@ -28,6 +28,11 @@ def login():
         conn = sqlite3.connect('database.db')
         if check_user_psw(username, password):
             session['user'] = username
+            role = get_role(username)
+            if role == 'admin':
+                session['admin'] = True
+            else:
+                print("Role is not admin, but: ", role)
             return redirect(url_for('home'))
         else:
             return render_template('message.html', message="Wrong username or password", forward="/login")
@@ -36,6 +41,7 @@ def login():
 @app.route("/logout", methods=['GET'])
 def logout():
     session.pop('user', None)
+    session.pop('admin', None)
     return redirect(url_for('login'))
 
 
@@ -43,6 +49,12 @@ def logout():
 def users():
     if not(session.get('user')):
         return render_template("message.html", message="Please log in first", forward="/login")
+    else:
+        username = session.get('user')
+
+    role = get_role(username)
+    if role != 'admin':
+        return render_template("message.html", message="Admin only !", forward="/")
     
     if request.method == 'POST':
         #update:
@@ -72,6 +84,17 @@ def new_user():
         return redirect(url_for('users'))
     return render_template('new_user.html')
 
+@app.route("/new_job", methods=['GET', 'POST'])
+def new_job():
+    if not(session.get('user')):
+        return render_template("message.html", message="Please log in first", forward="/login")
+    if request.method == 'POST':
+        description = request.form['description']
+        link = request.form['link']
+        create_job(description, link)
+        return redirect(url_for('jobs'))
+    return render_template('new_job.html')
+
 @app.route("/classes", methods=['GET', 'POST'])
 def classes():
     if not(session.get('user')):
@@ -93,7 +116,7 @@ def jobs():
     if request.method == 'POST':
         pass
 
-    return render_template("job_board.html")
+    return render_template('job_board.html', jobs=get_jobs())
 
 #   --- API ENDPOINTS ---
 

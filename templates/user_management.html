@@ -1,33 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
 <div>
-    <p>{{ message }}</p>
-    <br>
-    <a href="{{url_for('home')}}"><button class="btn btn-primary">Back</button></a>
-    <a href="{{url_for('new_user')}}"><button class="btn btn-success">New</button></a>
-    <br>
-    <form method="POST">
-        <table class="table times_table"  width="400px">
-            <tr><h3>User Management</h3></tr>
-            <tr><th>id</th><th>username</th><th>email</th><th>role</th><th>new role</th></tr>
-            {% for user in users %}
+    {% if session['admin'] %}
+        <p>{{ message }}</p>
+        <br>
+        <a href="{{url_for('home')}}"><button class="btn btn-primary">Back</button></a>
+        <a href="{{url_for('new_user')}}"><button class="btn btn-success">New</button></a>
+        <br>
+        <form method="POST">
+            <table class="table times_table"  width="400px">
+                <tr><h3>User Management</h3></tr>
+                <tr><th>id</th><th>username</th><th>email</th><th>role</th><th>new role</th></tr>
+                {% for user in users %}
 
-            <tr>
-                <td>{{user[0]}}</td><td>{{user[1]}}</td><td>{{user[3]}}</td><td>{{user[4]}}</td>
-            
-                <td>
-                    <select name="input_{{user[0]}}" id="role">
-                    <option value="admin">admin</option>
-                    <option value="clerk">clerk</option>
-                    </select>    
-                </td>
-                <td><button value="{{user[0]}}" name="id" class="btn btn-info">Update</button></td>
-                <td><button value="{{user[0]}}" name="del" class="btn btn-danger">Delete</button></td>
-            </tr>
-            {% endfor %}
-        </table>
-    </form>
+                <tr>
+                    <td>{{user[0]}}</td><td>{{user[1]}}</td><td>{{user[3]}}</td><td>{{user[4]}}</td>
+                
+                    <td>
+                        <select name="input_{{user[0]}}" id="role">
+                        <option value="admin">admin</option>
+                        <option value="clerk">clerk</option>
+                        </select>    
+                    </td>
+                    <td><button value="{{user[0]}}" name="id" class="btn btn-info">Update</button></td>
+                    <td><button value="{{user[0]}}" name="del" class="btn btn-danger">Delete</button></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    {% else %}
+    
+        <h1>Admin only !</h1>
 
+    {% endif %}
 
 </div>
 {% endblock %}
