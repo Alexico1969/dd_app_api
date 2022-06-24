@@ -64,3 +64,7 @@ a:hover{
 .container{
     margin-left: -10px;
 }
+
+.mw-300{
+    min-width: 300px;
+}
