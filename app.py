@@ -142,5 +142,17 @@ def message():
     return jsonify(output)
     
 
+@app.route("/joblist", methods=["GET"])
+@cross_origin()
+def joblist():
+    jobs = get_jobs()
+    output_list = []
+    for job in jobs:
+        output_list.append(job[1] + "&" + job[2])
+    output = ""
+    for time in output_list:
+        output += time + "|"
+    return jsonify(output)
+
 if __name__=='__main__':
     app.run(debug=True)
